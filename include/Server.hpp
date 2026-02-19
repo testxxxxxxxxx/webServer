@@ -12,7 +12,7 @@ namespace MainServer {
 		int fd, port;
 
 		void init();
-		struct sockadd_in saddr, caddr;
+		struct sockaddr_in saddr, caddr;
 
 		public:
 			
