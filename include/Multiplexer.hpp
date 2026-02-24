@@ -5,11 +5,11 @@
 
 namespace Multiplexing {
 	class Multiplexer {
-		int efd, maxEvent;
+		int efd, maxEvents;
 		SocketServer::Server* s;
 		public:
 
-			Multiplexer(SocketServer::Server* s, int maxEvent): s(s), maxEvent(maxEvent) {
+			Multiplexer(SocketServer::Server* s, int maxEvents): s(s), maxEvents(maxEvents) {
 			}
 			~Multiplexer() {
 				delete this->s;
