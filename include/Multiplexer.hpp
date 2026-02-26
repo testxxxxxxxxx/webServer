@@ -1,7 +1,9 @@
 #ifndef MULTIPLEXER_HPP
 #define MULTIPLEXER_HPP
 #include "Server.hpp"
+#include "Client.hpp"
 #include <sys/epoll.h>
+#include <queue>
 
 namespace Multiplexing {
 	class Multiplexer {
@@ -16,7 +18,7 @@ namespace Multiplexing {
 			}
 
 			void init();
-			void loopEvent();
+			void loopEvent(std::queue<ClientRequest::Client*> requestQueue);
 			void notifyWritable(int fd);
 	};
 };

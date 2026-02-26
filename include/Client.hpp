@@ -1,13 +1,13 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
-#include <string>
-#include <queue>
+#include <unordered_map>
 
 namespace ClientRequest {
 	class Client {
 		public:
 			int cfd;
-			queue<string> requests;
+			char* method,* resource,* httpVersion;
+			std::unordered_map<char*, char*> headers;
 	};
 };
 #endif

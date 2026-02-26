@@ -9,7 +9,7 @@ void Multiplexing::Multiplexer::init() {
 		exit(1);
 	}
 }
-void Multiplexing::Multiplexer::loopEvent() {
+void Multiplexing::Multiplexer::loopEvent(std::queue<ClientRequest::Client*> requestQueue) {
 	struct epoll_event event, events[this->maxEvents];
         event.events = EPOLLIN;
 	event.data.fd = this->s->getServerfd();
@@ -26,11 +26,13 @@ void Multiplexing::Multiplexer::loopEvent() {
 				epoll_ctl(this->efd, EPOLL_CTL_ADD, cfd, &event);
 			} else {
 				if(events[i].events & EPOLLIN) {
-					char buf[1024] = {};
-					int rc = read(events[i].data.fd, buf, 1024);
+					char req[1024] = {};
+					int rc = read(events[i].data.fd, req, 1024);
+					ClientRequest::Client* cl = new ClientRequest::Client();
 
-					//HTTP Request checker	
+					//HTTP Request checker
 
+					requestQueue.push(cl);
 				}
 				if(events[i].events & EPOLLOUT) {
 
